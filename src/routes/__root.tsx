@@ -1,7 +1,7 @@
 import type { QueryClient } from "@tanstack/react-query";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { createRootRouteWithContext, HeadContent, Scripts } from "@tanstack/react-router";
 import { ThemeProvider } from "@/components/theme";
+import { Toaster } from "@/components/ui/sonner";
 import appCss from "../styles.css?url";
 import { SiteHeader } from "./__root.header";
 
@@ -28,8 +28,8 @@ function RootLayout({ children }: { children: React.ReactNode }) {
             <SiteHeader />
             {children}
           </div>
+          <Toaster position="bottom-center" />
         </ThemeProvider>
-        {/* <ReactQueryDevtools buttonPosition="bottom-left" /> */}
         <Scripts />
       </body>
     </html>

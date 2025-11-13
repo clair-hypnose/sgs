@@ -1,4 +1,4 @@
-import z from "zod";
+import { z } from "zod/mini";
 
 // CONST -----------------------------------------------------------------------------------------------------------------------------------
 const q1Items = ["instagram", "facebook", "linkedIn", "tiktok", "youtube", "autre"] as const;
@@ -142,33 +142,33 @@ export const survey = [
 
 // SCHEMAS ---------------------------------------------------------------------------------------------------------------------------------
 export const zSurvey = z.object({
-  q1: z.enum(q1Items).array(),
+  q1: z.array(z.enum(q1Items)),
   q2: z.enum(q2Items),
-  q3: z.enum(q3Items).array().min(q3Items.length),
-  q4: z.enum(q4Items).array().min(q4Items.length),
-  q5: z.enum(q5Items).array(),
+  q3: z.array(z.enum(q3Items)).check(z.minLength(q3Items.length)),
+  q4: z.array(z.enum(q4Items)).check(z.minLength(q4Items.length)),
+  q5: z.array(z.enum(q5Items)),
   q6: z.enum(q6Items),
   q7: z.string(),
   q8: z.string(),
   q9: z.string(),
   q10: z.enum(q10Items),
   email: z.email(),
-  phone: z.string().optional(),
+  phone: z.optional(z.string()),
 });
 
-export const defaultSurveyValues: Survey = {
+export const defaultSurveyValues = {
   q1: [],
-  q2: "oui",
+  q2: undefined,
   q3: [...q3Items],
   q4: [...q4Items],
   q5: [],
-  q6: "tresProblematique",
+  q6: undefined,
   q7: "",
   q8: "",
   q9: "",
-  q10: "oui",
-  email: "contact@sgs.fr",
-  phone: "0612345678",
+  q10: undefined,
+  email: "",
+  phone: "",
 };
 
 // TYPES -----------------------------------------------------------------------------------------------------------------------------------

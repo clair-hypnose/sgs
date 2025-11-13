@@ -12,12 +12,18 @@ export function CheckboxField<V extends FieldValues, N extends FieldPath<V>>(pro
     <FieldSet data-invalid={isInvalid}>
       <FieldLegend>{legend}</FieldLegend>
       <FieldDescription>(Plusieurs réponses possibles)</FieldDescription>
-      <FieldGroup data-slot="checkbox-group">
+      <FieldGroup className="data-[slot=checkbox-group]:gap-1" data-slot="checkbox-group">
         {items.map((item) => (
-          <Field data-invalid={fieldState.invalid} key={item.id} orientation="horizontal">
+          <Field
+            className="cursor-pointer border border-transparent border-dashed px-1 hover:border-foreground has-[>[data-slot=field-content]]:items-center has-[>[data-state=checked]]:border-primary has-[>[data-state=checked]]:border-solid"
+            data-invalid={fieldState.invalid}
+            key={item.id}
+            orientation="horizontal"
+          >
             <Checkbox
               aria-invalid={fieldState.invalid}
               checked={field.value.includes(item.id)}
+              className="cursor-pointer"
               id={`form-rhf-complex-${item.id}`}
               name={field.name}
               onCheckedChange={(checked) => {
@@ -27,7 +33,9 @@ export function CheckboxField<V extends FieldValues, N extends FieldPath<V>>(pro
               }}
             />
             <FieldContent>
-              <FieldLabel htmlFor={`form-rhf-complex-${item.id}`}>{item.label}</FieldLabel>
+              <FieldLabel className="w-full cursor-pointer py-1" htmlFor={`form-rhf-complex-${item.id}`}>
+                {item.label}
+              </FieldLabel>
             </FieldContent>
           </Field>
         ))}

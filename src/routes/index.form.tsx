@@ -4,9 +4,11 @@ import confetti from "canvas-confetti";
 import { useRef } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { type FieldPath, type FieldValues, useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { Bg } from "@/components/bg";
 import { CheckboxField, type CheckboxFieldProps } from "@/components/form/checkbox-field";
-import { InputField } from "@/components/form/input-field";
+import { EmailField } from "@/components/form/email-field";
+import { PhoneField } from "@/components/form/phone-field";
 import { RadioField, type RadioFieldProps } from "@/components/form/radio-field";
 import { SortableField, type SortableFieldProps } from "@/components/form/sortable-field";
 import { TextareaField, type TextareaFieldProps } from "@/components/form/textarea-field";
@@ -14,20 +16,25 @@ import type { FieldType } from "@/components/form/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FieldGroup, FieldSeparator } from "@/components/ui/field";
+import { LoadingSwap } from "@/components/ui/loading-swap";
 import { defaultSurveyValues, type Survey, survey, zSurvey } from "./index.utils";
 
 // MAIN ------------------------------------------------------------------------------------------------------------------------------------
 export function SurveyForm() {
-  const { control, handleSubmit } = useForm<Survey>({
+  const { control, formState, handleSubmit } = useForm<Survey>({
     resolver: zodResolver(zSurvey),
     defaultValues: defaultSurveyValues,
   });
 
+  const { isSubmitting } = formState;
+
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  function onSubmit(_data: Survey) {
+  function onSubmit(data: Survey) {
     if (!buttonRef.current) return;
     const rect = buttonRef.current.getBoundingClientRect();
+
+    console.log(data);
 
     confetti({
       particleCount: 100,
@@ -37,6 +44,8 @@ export function SurveyForm() {
         y: (rect.top + rect.height / 2) / window.innerHeight,
       },
     });
+
+    toast.success("Merci ! Nous avons bien reçu vos réponses.");
   }
 
   return (
@@ -72,10 +81,12 @@ export function SurveyForm() {
               </CardDescription>
             </CardHeader>
             <FieldGroup className="flex-1 gap-4">
-              <InputField control={control} legend="E-mail" name="email" />
-              <InputField control={control} legend="Téléphone" name="phone" />
+              <EmailField control={control} legend="E-mail" name="email" />
+              <PhoneField control={control} legend="Téléphone" name="phone" />
               <Button ref={buttonRef} size="lg">
-                Envoyer
+                <LoadingSwap className="inline-flex items-center gap-2" isLoading={isSubmitting}>
+                  Envoyer
+                </LoadingSwap>
               </Button>
             </FieldGroup>
           </CardContent>

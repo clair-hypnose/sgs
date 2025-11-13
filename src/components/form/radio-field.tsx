@@ -12,11 +12,15 @@ export function RadioField<V extends FieldValues, N extends FieldPath<V>>(props:
     <FieldSet data-invalid={isInvalid}>
       <FieldLegend>{legend}</FieldLegend>
       {description && <FieldDescription>{description}</FieldDescription>}
-      <RadioGroup aria-invalid={isInvalid} name={field.name} onValueChange={field.onChange} value={field.value}>
+      <RadioGroup aria-invalid={isInvalid} className="gap-1" name={field.name} onValueChange={field.onChange} value={field.value}>
         {items.map((item) => (
-          <Field key={item.id} orientation="horizontal">
-            <RadioGroupItem id={item.id} value={item.id} />
-            <FieldLabel className="font-normal" htmlFor={item.id}>
+          <Field
+            className="cursor-pointer border border-transparent border-dashed px-1 hover:border-foreground"
+            key={item.id}
+            orientation="horizontal"
+          >
+            <RadioGroupItem className="cursor-pointer" id={item.id} value={item.id} />
+            <FieldLabel className="w-full cursor-pointer py-1 font-normal" htmlFor={item.id}>
               {item.label}
             </FieldLabel>
           </Field>
