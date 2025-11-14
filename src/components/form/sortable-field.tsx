@@ -1,5 +1,6 @@
 import { type FieldPath, type FieldValues, useController } from "react-hook-form";
-import { Field, FieldDescription, FieldError, FieldLegend, FieldSet } from "@/components/ui/field";
+import { Field, FieldDescription, FieldLegend, FieldSet } from "@/components/ui/field";
+import { FieldError } from "./field-error";
 import { SortableList } from "./sortable-list";
 import type { FieldProps } from "./utils";
 
@@ -13,7 +14,7 @@ export function SortableField<V extends FieldValues, N extends FieldPath<V>>({ l
       <Field data-invalid={fieldState.invalid} orientation="horizontal">
         <SortableList onValueChange={field.onChange} value={field.value} />
       </Field>
-      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+      <FieldError {...fieldState} />
     </FieldSet>
   );
 }

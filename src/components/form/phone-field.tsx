@@ -1,7 +1,8 @@
 import { PhoneIcon } from "lucide-react";
 import { type FieldPath, type FieldValues, useController } from "react-hook-form";
-import { Field, FieldError, FieldLegend, FieldSet } from "@/components/ui/field";
+import { Field, FieldLegend, FieldSet } from "@/components/ui/field";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "../ui/input-group";
+import { FieldError } from "./field-error";
 import type { FieldProps } from "./utils";
 
 // MAIN ------------------------------------------------------------------------------------------------------------------------------------
@@ -18,7 +19,7 @@ export function PhoneField<V extends FieldValues, N extends FieldPath<V>>({ lege
           </InputGroupAddon>
         </InputGroup>
       </Field>
-      {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
+      <FieldError {...fieldState} />
     </FieldSet>
   );
 }

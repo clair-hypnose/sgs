@@ -1,14 +1,13 @@
-import { CircleAlertIcon } from "lucide-react";
 import { type FieldPath, type FieldValues, useController } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
-import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field";
+import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field";
 import { Input } from "../ui/input";
+import { FieldError } from "./field-error";
 import type { FieldProps, SurveyItem } from "./utils";
 
 // STYLES ----------------------------------------------------------------------------------------------------------------------------------
 const CHECKBOX = {
   checkbox: () => "cursor-pointer",
-  error: () => "flex items-center gap-2 rounded-md bg-destructive/10 p-2",
   field: () => `cursor-pointer rounded-md border border-transparent border-dashed px-2 
   hover:border-foreground 
   has-[>[data-slot=field-content]]:items-center has-[>[data-state=checked]]:bg-muted`,
@@ -20,7 +19,7 @@ const CHECKBOX = {
 export function CheckboxField<V extends FieldValues, N extends FieldPath<V>>(props: CheckboxFieldProps<V, N>) {
   const { description, items, legend, ...rest } = props;
   const { field, fieldState } = useController(rest);
-  const { error, invalid } = fieldState;
+  const { invalid } = fieldState;
   const { name, onBlur, onChange, value } = field;
 
   const handleCheckedChange = (id: string) => (checked: boolean) => {
@@ -56,12 +55,7 @@ export function CheckboxField<V extends FieldValues, N extends FieldPath<V>>(pro
             </FieldLabel>
           </Field>
         ))}
-        {invalid && (
-          <FieldError className={CHECKBOX.error()} errors={[error]}>
-            <CircleAlertIcon className="size-4" />
-            {error?.message}
-          </FieldError>
-        )}
+        <FieldError {...fieldState} />
       </FieldGroup>
     </FieldSet>
   );

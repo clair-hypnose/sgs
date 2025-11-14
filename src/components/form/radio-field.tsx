@@ -1,12 +1,11 @@
-import { CircleAlertIcon } from "lucide-react";
 import { type FieldPath, type FieldValues, useController } from "react-hook-form";
-import { Field, FieldDescription, FieldError, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field";
+import { Field, FieldDescription, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { FieldError } from "./field-error";
 import type { FieldProps, SurveyItem } from "./utils";
 
 // STYLES ----------------------------------------------------------------------------------------------------------------------------------
 const RADIO = {
-  error: () => "flex items-center gap-2 rounded-md bg-destructive/10 p-2",
   field: () => `cursor-pointer rounded-md border border-transparent border-dashed px-2 
   hover:border-foreground 
   has-[>[data-slot=field-content]]:items-center has-[>[data-state=checked]]:bg-muted`,
@@ -19,7 +18,7 @@ const RADIO = {
 export function RadioField<V extends FieldValues, N extends FieldPath<V>>(props: RadioFieldProps<V, N>) {
   const { description, items, legend, ...rest } = props;
   const { field, fieldState } = useController(rest);
-  const { error, invalid } = fieldState;
+  const { invalid } = fieldState;
   const { name, onChange, value } = field;
   return (
     <FieldSet data-invalid={invalid}>
@@ -35,12 +34,7 @@ export function RadioField<V extends FieldValues, N extends FieldPath<V>>(props:
           </Field>
         ))}
       </RadioGroup>
-      {invalid && (
-        <FieldError className={RADIO.error()} errors={[error]}>
-          <CircleAlertIcon className="size-4" />
-          {error?.message}
-        </FieldError>
-      )}
+      <FieldError {...fieldState} />
     </FieldSet>
   );
 }
