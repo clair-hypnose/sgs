@@ -24,7 +24,7 @@ function RootLayout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <ThemeProvider>
-          <div className="container mx-auto flex flex-col p-4">
+          <div className="container mx-auto flex flex-col px-4 py-4 md:px-8">
             <SiteHeader />
             {children}
           </div>

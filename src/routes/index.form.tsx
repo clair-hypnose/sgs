@@ -1,4 +1,3 @@
-import { DevTool } from "@hookform/devtools";
 import { zodResolver } from "@hookform/resolvers/zod";
 import confetti from "canvas-confetti";
 import { useRef } from "react";
@@ -17,12 +16,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { FieldGroup, FieldSeparator } from "@/components/ui/field";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { defaultSurveyValues, type Survey, survey, zSurvey } from "./index.utils";
+import { defaultSurveyValues, type SurveyValues, survey, zSurveyValues } from "./index.utils";
 
 // MAIN ------------------------------------------------------------------------------------------------------------------------------------
 export function SurveyForm() {
-  const { control, formState, handleSubmit } = useForm<Survey>({
-    resolver: zodResolver(zSurvey),
+  const { control, formState, handleSubmit } = useForm<SurveyValues>({
+    mode: "onTouched",
+    resolver: zodResolver(zSurveyValues),
     defaultValues: defaultSurveyValues,
   });
 
@@ -30,7 +30,7 @@ export function SurveyForm() {
 
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  function onSubmit(data: Survey) {
+  function onSubmit(data: SurveyValues) {
     if (!buttonRef.current) return;
     const rect = buttonRef.current.getBoundingClientRect();
 
@@ -82,7 +82,7 @@ export function SurveyForm() {
             </CardHeader>
             <FieldGroup className="flex-1 gap-4">
               <EmailField control={control} legend="E-mail" name="email" />
-              <PhoneField control={control} legend="Téléphone" name="phone" />
+              <PhoneField control={control} legend="Téléphone (optionnel)" name="phone" />
               <Button ref={buttonRef} size="lg">
                 <LoadingSwap className="inline-flex items-center gap-2" isLoading={isSubmitting}>
                   Envoyer
@@ -92,7 +92,7 @@ export function SurveyForm() {
           </CardContent>
         </Card>
       </section>
-      <DevTool control={control} />
+      {/* <DevTool control={control} /> */}
     </form>
   );
 }

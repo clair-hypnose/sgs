@@ -1,32 +1,46 @@
+import { CircleAlertIcon } from "lucide-react";
 import { type FieldPath, type FieldValues, useController } from "react-hook-form";
 import { Field, FieldDescription, FieldError, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import type { FieldProps, SurveyItem } from "./utils";
 
+// STYLES ----------------------------------------------------------------------------------------------------------------------------------
+const RADIO = {
+  error: () => "flex items-center gap-2 rounded-md bg-destructive/10 p-2",
+  field: () => `cursor-pointer rounded-md border border-transparent border-dashed px-2 
+  hover:border-foreground 
+  has-[>[data-slot=field-content]]:items-center has-[>[data-state=checked]]:bg-muted`,
+  group: () => "gap-1",
+  label: () => "w-full cursor-pointer py-1 font-normal",
+  radio: () => "cursor-pointer bg-background",
+};
+
 // MAIN ------------------------------------------------------------------------------------------------------------------------------------
 export function RadioField<V extends FieldValues, N extends FieldPath<V>>(props: RadioFieldProps<V, N>) {
   const { description, items, legend, ...rest } = props;
   const { field, fieldState } = useController(rest);
-  const isInvalid = fieldState.invalid;
+  const { error, invalid } = fieldState;
+  const { name, onChange, value } = field;
   return (
-    <FieldSet data-invalid={isInvalid}>
+    <FieldSet data-invalid={invalid}>
       <FieldLegend>{legend}</FieldLegend>
       {description && <FieldDescription>{description}</FieldDescription>}
-      <RadioGroup aria-invalid={isInvalid} className="gap-1" name={field.name} onValueChange={field.onChange} value={field.value}>
-        {items.map((item) => (
-          <Field
-            className="cursor-pointer border border-transparent border-dashed px-1 hover:border-foreground"
-            key={item.id}
-            orientation="horizontal"
-          >
-            <RadioGroupItem className="cursor-pointer" id={item.id} value={item.id} />
-            <FieldLabel className="w-full cursor-pointer py-1 font-normal" htmlFor={item.id}>
-              {item.label}
+      <RadioGroup aria-invalid={invalid} className={RADIO.group()} name={name} onValueChange={onChange} value={value}>
+        {items.map(({ id, label }) => (
+          <Field className={RADIO.field()} key={`${name}_${id}`} orientation="horizontal">
+            <RadioGroupItem className={RADIO.radio()} id={`${name}_${id}`} value={id} />
+            <FieldLabel className={RADIO.label()} htmlFor={`${name}_${id}`}>
+              {label}
             </FieldLabel>
           </Field>
         ))}
       </RadioGroup>
-      {isInvalid && <FieldError errors={[fieldState.error]} />}
+      {invalid && (
+        <FieldError className={RADIO.error()} errors={[error]}>
+          <CircleAlertIcon className="size-4" />
+          {error?.message}
+        </FieldError>
+      )}
     </FieldSet>
   );
 }
