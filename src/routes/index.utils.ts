@@ -156,10 +156,9 @@ export const zSurveyValues = z.object({
     .check(
       z.refine((items) => items.filter(({ editable }) => editable).every(({ label }) => label !== ""), "Certaines réponses sont vides.")
     ),
-  q5: z.array(zSurveyEditableItem).check(
-    z.minLength(1, "Cette question nécessite au moins une réponse."),
-    z.refine((items) => items.every(({ label }) => label !== ""), "Cette question nécessite au moins une réponse.")
-  ),
+  q5: z
+    .array(zSurveyEditableItem)
+    .check(z.refine((items) => items.filter(({ label }) => label !== "").length > 0, "Cette question nécessite au moins une réponse.")),
   q6: z.string().check(z.minLength(1, "Cette question nécessite une réponse.")),
   q7: z.string().check(z.minLength(1, "Cette question nécessite une réponse.")),
   q8: z.string().check(z.minLength(1, "Cette question nécessite une réponse.")),

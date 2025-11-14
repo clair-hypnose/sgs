@@ -70,17 +70,17 @@ export function SurveyForm() {
       </Card>
       <section className="relative">
         <Bg />
-        <Card className="relative z-10 bg-background py-14">
-          <CardContent className="flex flex-row items-center gap-4">
-            <CardHeader className="flex-1">
-              <CardTitle className="text-balance font-black text-3xl">
-                Alors, communiquez-nous vos coordonnées et rejoignez vous aussi la communauté !
-              </CardTitle>
-              <CardDescription className="text-balance font-normal text-xl">
-                Merci à vous de nous avoir consacré ce temps qu'on sait précieux. N’hésitez pas à partager ce sondage avec votre réseau de
-                thérapeutes.
-              </CardDescription>
-            </CardHeader>
+        <Card className="relative z-10 bg-background py-14 lg:flex-row">
+          <CardHeader className="flex-1">
+            <CardTitle className="font-black text-3xl lg:text-balance">
+              Alors, communiquez-nous vos coordonnées et rejoignez vous aussi la communauté !
+            </CardTitle>
+            <CardDescription className="font-normal text-xl lg:text-balance">
+              Merci à vous de nous avoir consacré ce temps qu'on sait précieux. N’hésitez pas à partager ce sondage avec votre réseau de
+              thérapeutes.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="flex-1">
             <FieldGroup className="flex-1 gap-4">
               <EmailField control={control} legend="E-mail" name="email" />
               <PhoneField control={control} legend="Téléphone (optionnel)" name="phone" />
