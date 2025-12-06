@@ -3,6 +3,7 @@ import { type Dispatch, type SetStateAction, useState } from "react";
 import { type ControllerRenderProps, type FieldPath, type FieldValues, useController } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Field, FieldDescription, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field";
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from "../ui/input-group";
 import { FieldError } from "./field-error";
@@ -20,7 +21,7 @@ const CHECKBOX = {
 
 // MAIN ------------------------------------------------------------------------------------------------------------------------------------
 export function CheckboxesField<V extends FieldValues, N extends FieldPath<V>>(props: CheckboxesFieldProps<V, N>) {
-  const { description, legend, ...rest } = props;
+  const { description, index, legend, ...rest } = props;
   const { field, fieldState } = useController(rest);
   const [items, setItems] = useState([...props.items]);
   const { onChange, value } = field;
@@ -34,7 +35,10 @@ export function CheckboxesField<V extends FieldValues, N extends FieldPath<V>>(p
 
   return (
     <FieldSet data-invalid={invalid}>
-      <FieldLegend>{legend}</FieldLegend>
+      <FieldLegend className="flex items-start gap-2">
+        <Badge className="mt-0.5 h-5 min-w-5 rounded-full px-1 font-mono tabular-nums">{index}</Badge>
+        {legend}
+      </FieldLegend>
       {description && <FieldDescription>{description}</FieldDescription>}
       <FieldGroup className={CHECKBOX.group()} data-slot="checkbox-group">
         {items.map((item) => (
@@ -50,6 +54,7 @@ export function CheckboxesField<V extends FieldValues, N extends FieldPath<V>>(p
 }
 export type CheckboxesFieldProps<V extends FieldValues, N extends FieldPath<V>> = FieldProps<V, N> & {
   description?: string;
+  index: number;
   items: readonly SurveyEditableItem[];
 };
 
@@ -91,8 +96,13 @@ export function CheckboxField<V extends FieldValues, N extends FieldPath<V>>({ f
       />
       <FieldLabel className={CHECKBOX.label()} htmlFor={`${name}_${item.id}`}>
         {item.editable ? (
-          <InputGroup className="max-w-2xs">
-            <InputGroupInput onChange={changeEditable} placeholder="Veuillez préciser" value={item.label} />
+          <InputGroup className="max-w-2xs bg-background dark:bg-input">
+            <InputGroupInput
+              className="bg-transparent dark:bg-transparent"
+              onChange={changeEditable}
+              placeholder="Veuillez préciser"
+              value={item.label}
+            />
             <InputGroupAddon align="inline-end">
               <InputGroupButton aria-label="Retirer" className="cursor-pointer" onClick={remove} size="icon-xs" title="Retirer">
                 {<Trash2Icon />}

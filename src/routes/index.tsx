@@ -15,8 +15,8 @@ export function IndexPage() {
     <>
       <Bg />
       <Header>
-        <HeaderHeading className="max-w-4xl">
-          Pourquoi <span className="text-accent-foreground">TheraFlow</span> ?
+        <HeaderHeading className="max-w-4xl font-heading">
+          POURQUOI KREA<span className="text-primary">THERA</span> ?
         </HeaderHeading>
         <HeaderDescription>{description}</HeaderDescription>
       </Header>

@@ -5,7 +5,6 @@ import { useRef } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { type FieldPath, type FieldValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { Bg } from "@/components/bg";
 import { CheckboxesField, type CheckboxesFieldProps } from "@/components/form/checkbox-field";
 import { EmailField } from "@/components/form/email-field";
 import { PhoneField } from "@/components/form/phone-field";
@@ -14,8 +13,9 @@ import { SortableField, type SortableFieldProps } from "@/components/form/sortab
 import { TextareaField, type TextareaFieldProps } from "@/components/form/textarea-field";
 import type { FieldType } from "@/components/form/utils";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { FieldGroup, FieldSeparator } from "@/components/ui/field";
+import { Item, ItemContent, ItemGroup, ItemTitle } from "@/components/ui/item";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { defaultSurveyValues, type SurveyValues, survey, zSurveyValues } from "./index.utils";
 
@@ -31,11 +31,13 @@ export function SurveyForm() {
 
   const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-  function onSubmit(data: SurveyValues) {
+  async function onSubmit(data: SurveyValues) {
     if (!buttonRef.current) return;
     const rect = buttonRef.current.getBoundingClientRect();
 
     console.log(data);
+
+    await new Promise((resolve) => setTimeout(resolve, 1000));
 
     confetti({
       particleCount: 100,
@@ -51,29 +53,50 @@ export function SurveyForm() {
 
   return (
     <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
-      <Card className="relative z-10 gap-10 bg-background">
+      <Card className="relative z-10 gap-10">
         <CardHeader>
-          <CardTitle className="text-center font-black text-2xl">
+          <CardTitle className="text-center font-heading font-light text-2xl">
             Pour cela, on aimerait en savoir plus sur vos besoins à l'aide de ce sondage.
           </CardTitle>
         </CardHeader>
         <CardContent>
           <FieldGroup>
-            {survey.map((props, i) => (
+            {survey.map((props, index) => (
               <Fragment key={props.name}>
-                <SurveyField control={control} {...props} />
-                {i < survey.length - 1 && <FieldSeparator className="border-grid" />}
+                <SurveyField control={control} index={index + 1} {...props} />
+                {index < survey.length - 1 && <FieldSeparator className="border-grid" />}
               </Fragment>
             ))}
           </FieldGroup>
+          <CardFooter className="mt-10 flex-col items-start gap-4 p-0">
+            <ItemGroup className="grid grid-cols-1 gap-4 text-center md:grid-cols-3">
+              <Item className="items-start" variant="muted">
+                <ItemContent className="items-center text-base">
+                  <ItemTitle className="font-heading font-light text-lg text-primary uppercase">Notre objectif numéro 1</ItemTitle>
+                  Créer une agence pensée pour vous simplifier la vie.
+                </ItemContent>
+              </Item>
+              <Item className="items-start" variant="muted">
+                <ItemContent className="items-center text-base">
+                  <ItemTitle className="font-heading font-light text-lg uppercase">Avec les outils d’aujourd’hui</ItemTitle>
+                  Notre ambition est de vous aider à vous concentrer sur l’essentiel: votre métier.
+                </ItemContent>
+              </Item>
+              <Item className="items-start" variant="muted">
+                <ItemContent className="items-center text-base">
+                  <ItemTitle className="font-heading font-light text-lg text-primary uppercase">On s'occupe du reste!</ItemTitle>
+                  Votre communication, vos réseaux sociaux et la création de contenu qui vous ressemble.
+                </ItemContent>
+              </Item>
+            </ItemGroup>
+          </CardFooter>
         </CardContent>
       </Card>
       <section className="relative">
-        <Bg />
-        <Card className="relative z-10 bg-background py-14 lg:flex-row">
+        <Card className="relative z-10 py-14 lg:flex-row">
           <CardHeader className="flex-1">
-            <CardTitle className="font-black text-3xl lg:text-balance">
-              Alors, communiquez-nous vos coordonnées et rejoignez vous aussi la communauté !
+            <CardTitle className="font-heading font-light text-3xl leading-none lg:text-balance">
+              Prêt·e à rejoindre l'aventure ? Alors, partagez vos coordonnées et embarquez, vous aussi, dans la communauté !
             </CardTitle>
             <CardDescription className="font-normal text-xl lg:text-balance">
               Merci à vous de nous avoir consacré ce temps qu'on sait précieux. N’hésitez pas à partager ce sondage avec votre réseau de
@@ -85,8 +108,9 @@ export function SurveyForm() {
               <EmailField control={control} legend="E-mail" name="email" />
               <PhoneField control={control} legend="Téléphone (optionnel)" name="phone" />
               <Button ref={buttonRef} size="lg">
-                <LoadingSwap className="inline-flex items-center gap-2" isLoading={isSubmitting}>
-                  Envoyer
+                <LoadingSwap className="inline-flex cursor-pointer items-center gap-2 font-heading text-2xl" isLoading={isSubmitting}>
+                  <span className="icon-[roentgen--survey-point]" />
+                  ENVOYER
                 </LoadingSwap>
               </Button>
             </FieldGroup>

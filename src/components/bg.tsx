@@ -1,7 +1,7 @@
 export function Bg() {
   return (
     <>
-      <div className="mask-[radial-gradient(circle_at_center,black_0%,black_20%,transparent_75%)] absolute inset-0 aspect-square">
+      <div className="mask-[radial-gradient(circle_at_center,black_0%,black_20%,transparent_75%)] pointer-events-none absolute inset-0 aspect-square">
         <svg className="h-full w-full text-foreground/5" height="32" width="32">
           <title>Plus</title>
           <defs>
@@ -14,8 +14,8 @@ export function Bg() {
         </svg>
       </div>
       <div>
-        <div className="absolute inset-x-[0%] bottom-0 left-0 h-[500px] rounded-full bg-primary-gradient/11 blur-[100px] will-change-transform md:h-[950px]" />
-        <div className="absolute inset-x-[30%] right-0 bottom-0 h-[500px] rounded-full bg-secondary-gradient/9 blur-[100px] will-change-transform md:h-[950px]" />
+        <div className="absolute inset-x-[0%] inset-y-[0%] left-0 rounded-full bg-primary-gradient/11 blur-[100px] will-change-transform" />
+        <div className="absolute inset-x-[30%] inset-y-[0%] right-0 rounded-full bg-secondary-gradient/9 blur-[100px] will-change-transform" />
       </div>
     </>
   );

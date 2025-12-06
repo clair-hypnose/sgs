@@ -12,10 +12,7 @@ export function Header({ className, children, ...props }: React.ComponentProps<"
 
 export function HeaderHeading({ className, ...props }: React.ComponentProps<"h1">) {
   return (
-    <h1
-      className={cn("max-w-2xl text-balance font-black text-4xl text-primary leading-tighter lg:leading-[1.1] xl:text-5xl", className)}
-      {...props}
-    />
+    <h1 className={cn("max-w-2xl text-balance font-black text-4xl leading-tighter lg:leading-[1.1] xl:text-5xl", className)} {...props} />
   );
 }
 

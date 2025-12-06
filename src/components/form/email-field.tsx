@@ -15,7 +15,7 @@ export function EmailField<V extends FieldValues, N extends FieldPath<V>>({ lege
     <Field className="gap-2" data-invalid={invalid}>
       <FieldLabel htmlFor={name}>{legend}</FieldLabel>
       <InputGroup>
-        <InputGroupInput aria-invalid={invalid} id={name} type="email" {...field} />
+        <InputGroupInput aria-invalid={invalid} className="bg-transparent dark:bg-transparent" id={name} type="email" {...field} />
         <InputGroupAddon>
           <MailIcon />
         </InputGroupAddon>

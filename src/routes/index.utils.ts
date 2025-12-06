@@ -35,7 +35,7 @@ import { zSurveyEditableItem } from "@/components/form/utils";
 export const survey = [
   {
     name: "q1",
-    legend: "1 - Sur quels réseaux sociaux êtes-vous actuellement présent·e pour votre activité professionnelle ?",
+    legend: "Sur quels réseaux sociaux êtes-vous actuellement présent·e pour votre activité professionnelle ?",
     description: "(Aucune ou plusieurs réponses possibles)",
     type: "checkbox",
     items: [
@@ -49,7 +49,7 @@ export const survey = [
   },
   {
     name: "q2",
-    legend: "2 - Estimez-vous qu'être présent·e sur les réseaux sociaux vous permette d’obtenir de nouveaux patients/clients ?",
+    legend: "Estimez-vous qu'être présent·e sur les réseaux sociaux vous permette d’obtenir de nouveaux patients/clients ?",
     type: "radio",
     items: [
       { id: "oui", label: "Oui, significativement" },
@@ -59,7 +59,7 @@ export const survey = [
   },
   {
     name: "q3",
-    legend: "3 - Quelle est la meilleure façon, selon vous, d’acquérir des patients/clients ?",
+    legend: "Quelle est la meilleure façon, selon vous, d’acquérir des patients/clients ?",
     type: "sortable",
     items: [
       { id: "boucheAOreille", label: "Le bouche-à-oreille" },
@@ -71,7 +71,7 @@ export const survey = [
   },
   {
     name: "q4",
-    legend: "4 - Si vous ne publiez pas sur les réseaux sociaux, qu'est-ce qui vous en empêche principalement ?",
+    legend: "Si vous ne publiez pas sur les réseaux sociaux, qu'est-ce qui vous en empêche principalement ?",
     type: "sortable",
     items: [
       { id: "manqueTemps", label: "Je manque de temps" },
@@ -87,7 +87,7 @@ export const survey = [
   },
   {
     name: "q5",
-    legend: "5 - Quelles seraient vos principales préoccupations concernant l'utilisation d'une I.A. pour votre communication ?",
+    legend: "Quelles seraient vos principales préoccupations concernant l'utilisation d'une I.A. pour votre communication ?",
     description: "(Une à plusieurs réponses possibles)",
     type: "checkbox",
     items: [
@@ -105,7 +105,7 @@ export const survey = [
   {
     name: "q6",
     legend:
-      "6 - A quel point êtes-vous à l'aise avec l'idée qu'une Intelligence Artificielle (I.A.) génère du contenu professionnel pour vous ?",
+      "A quel point êtes-vous à l'aise avec l'idée qu'une Intelligence Artificielle (I.A.) génère du contenu professionnel pour vous ?",
     type: "radio",
     items: [
       { id: "tresProblematique", label: "Très mal à l'aise" },
@@ -117,29 +117,29 @@ export const survey = [
   },
   {
     name: "q7",
-    legend: "7 - Si vous pouviez décrire l'outil idéal pour gérer votre communication sur les réseaux sociaux, quel serait-il ?",
+    legend: "Si vous pouviez décrire l'outil idéal pour gérer votre communication sur les réseaux sociaux, quel serait-il ?",
     type: "textarea",
   },
   {
     name: "q8",
-    legend: "8 - Quel serait le bénéfice n°1 que vous attendriez d'un tel outil ?",
+    legend: "Quel serait le bénéfice n°1 que vous attendriez d'un tel outil ?",
     type: "textarea",
   },
   {
     name: "q9",
-    legend: "9 - Avant de nous laisser, on aimerait en savoir un peu plus sur vous, en quelques lignes :",
+    legend: "Avant de nous laisser, on aimerait en savoir un peu plus sur vous, en quelques lignes :",
     description: "(Exemple : je m'appelle Céline. Je suis sophrologue depuis 5 ans...)",
     type: "textarea",
   },
-  {
-    name: "q10",
-    legend: "10 - Prêt·e à rejoindre l'aventure pour nous aider à développer cette solution ?",
-    type: "radio",
-    items: [
-      { id: "oui", label: "Oui" },
-      { id: "peutEtre", label: "Peut-être, j'aimerais en savoir plus" },
-    ],
-  },
+  // {
+  //   name: "q10",
+  //   legend: "Prêt·e à rejoindre l'aventure pour nous aider à développer cette solution ?",
+  //   type: "radio",
+  //   items: [
+  //     { id: "oui", label: "Oui" },
+  //     { id: "peutEtre", label: "Peut-être, j'aimerais en savoir plus" },
+  //   ],
+  // },
 ] as const;
 
 // SCHEMAS ---------------------------------------------------------------------------------------------------------------------------------
@@ -163,7 +163,7 @@ export const zSurveyValues = z.object({
   q7: z.string().check(z.minLength(1, "Cette question nécessite une réponse.")),
   q8: z.string().check(z.minLength(1, "Cette question nécessite une réponse.")),
   q9: z.string().check(z.minLength(1, "Cette question nécessite une réponse.")),
-  q10: z.string().check(z.minLength(1, "Cette question nécessite une réponse.")),
+  // q10: z.string().check(z.minLength(1, "Cette question nécessite une réponse.")),
   email: z.email("L'email indiqué n'est pas valide."),
   phone: z.optional(z.string()),
 });
@@ -196,7 +196,7 @@ export const defaultSurveyValues: SurveyValues = {
   q7: "",
   q8: "",
   q9: "",
-  q10: "",
+  // q10: "",
   email: "",
   phone: "",
 };

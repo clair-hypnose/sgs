@@ -1,8 +1,9 @@
 @import 'tailwindcss';
-
 @import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
+
+@plugin "@iconify/tailwind4";
 
 body {
   @apply m-0;
@@ -19,84 +20,117 @@ code {
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.141 0.005 285.823);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.141 0.005 285.823);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.141 0.005 285.823);
-  --primary: oklch(0.21 0.006 285.885);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.967 0.001 286.375);
-  --secondary-foreground: oklch(0.21 0.006 285.885);
-  --muted: oklch(0.967 0.001 286.375);
-  --muted-foreground: oklch(0.552 0.016 285.938);
-  --accent: oklch(0.967 0.001 286.375);
-  --accent-foreground: oklch(0.21 0.006 285.885);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.004 286.32);
-  --input: oklch(0.92 0.004 286.32);
-  --ring: oklch(0.871 0.006 286.286);
+  --shadow-header: 0 0 24px rgba(34, 42, 53, 0.06),
+    0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04),
+    0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05),
+    0 1px 0 rgba(255, 255, 255, 0.1) inset;
+  --background: var(--color-gray-50);
+  --foreground: var(--color-gray-950);
+  --card: var(--color-white);
+  --card-foreground: var(--color-gray-950);
+  --popover: var(--color-white);
+  --popover-foreground: var(--color-gray-950);
+  --primary: var(--color-pink-400);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-gray-700);
+  --secondary-foreground: var(--color-white);
+  --muted: var(--color-gray-100);
+  --muted-foreground: var(--color-gray-600);
+  --accent: var(--color-gray-100);
+  --accent-foreground: var(--color-black);
+  --destructive: var(--color-rose-600);
+  --border: var(--color-gray-100);
+  --input: var(--color-gray-100);
+  --ring: var(--color-pink-400);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
+  --sidebar: var(--color-white);
+  --sidebar-foreground: var(--color-gray-950);
+  --sidebar-primary: var(--color-pink-400);
+  --sidebar-primary-foreground: var(--color-white);
+  --sidebar-accent: var(--color-gray-100);
+  --sidebar-accent-foreground: var(--color-gray-950);
+  --sidebar-border: var(--color-gray-100);
+  --sidebar-ring: var(--color-pink-400);
+  --font-heading: "Lilita One";
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.141 0.005 285.823);
-  --sidebar-primary: oklch(0.21 0.006 285.885);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.967 0.001 286.375);
-  --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
-  --sidebar-border: oklch(0.92 0.004 286.32);
-  --sidebar-ring: oklch(0.871 0.006 286.286);
-  --primary-gradient: oklch(0.64 0.16 269.74 / 1);
-  --secondary-gradient: oklch(0.73 0.19 144.71 / 1);
-  --tertiary-gradient: oklch(0.70 0.15 339.61 / 1);
+  --primary-gradient: var(--color-gray-300);
+  --secondary-gradient: var(--color-gray-950);
 }
 
 .dark {
-  --background: oklch(0.141 0.005 285.823);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.141 0.005 285.823);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.141 0.005 285.823);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.21 0.006 285.885);
-  --secondary: oklch(0.274 0.006 286.033);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.274 0.006 286.033);
-  --muted-foreground: oklch(0.705 0.015 286.067);
-  --accent: oklch(0.274 0.006 286.033);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.396 0.141 25.723);
-  --destructive-foreground: oklch(0.637 0.237 25.331);
-  --border: oklch(0.274 0.006 286.033);
-  --input: oklch(0.274 0.006 286.033);
-  --ring: oklch(0.442 0.017 285.786);
+  --background: var(--color-gray-950);
+  --foreground: var(--color-white);
+  --card: var(--color-gray-900);
+  --card-foreground: var(--color-white);
+  --popover: var(--color-gray-900);
+  --popover-foreground: var(--color-white);
+  --primary: var(--color-pink-400);
+  --primary-foreground: var(--color-white);
+  --secondary: var(--color-gray-400);
+  --secondary-foreground: var(--color-white);
+  --muted: var(--color-gray-800);
+  --muted-foreground: var(--color-gray-200);
+  --accent: var(--color-gray-800);
+  --accent-foreground: var(--color-white);
+  --destructive: var(--color-rose-400);
+  --border: var(--color-gray-800);
+  --input: var(--color-gray-700);
+  --ring: var(--color-pink-400);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.21 0.006 285.885);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.274 0.006 286.033);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(0.274 0.006 286.033);
-  --sidebar-ring: oklch(0.442 0.017 285.786);
-  --primary-gradient: oklch(0.27 0.16 269.18 / 1);
-  --secondary-gradient: oklch(0.73 0.19 144.71 / 1);
-  --tertiary-gradient: oklch(0.44 0.15 342.38 / 1);
+  --sidebar: var(--color-gray-900);
+  --sidebar-foreground: var(--color-white);
+  --sidebar-primary: var(--color-pink-400);
+  --sidebar-primary-foreground: var(--color-white);
+  --sidebar-accent: var(--color-gray-800);
+  --sidebar-accent-foreground: var(--color-white);
+  --sidebar-border: var(--color-gray-800);
+  --sidebar-ring: var(--color-pink-400);
+  --font-sans: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --radius: 0.625rem;
+  --primary-gradient: var(--color-gray-600);
+  --secondary-gradient: var(--color-gray-400);
+}
+
+@theme {
+  --color-gray-50: oklch(0.958 0.001 287.29);
+  --color-gray-100: oklch(0.922 0.003 286.78);
+  --color-gray-200: oklch(0.837 0.005 286.47);
+  --color-gray-300: oklch(0.759 0.008 286.31);
+  --color-gray-400: oklch(0.672 0.012 286.15);
+  --color-gray-500: oklch(0.596 0.014 286.04);
+  --color-gray-600: oklch(0.51 0.016 285.87);
+  --color-gray-700: oklch(0.432 0.018 285.65);
+  --color-gray-800: oklch(0.344 0.016 285.58);
+  --color-gray-900: oklch(0.267 0.011 285.66);
+  --color-gray-950: oklch(0.224 0.01 285.63);
+  --color-pink-50: oklch(0.959 0.018 8.88);
+  --color-pink-100: oklch(0.918 0.038 7.88);
+  --color-pink-200: oklch(0.846 0.077 8.8);
+  --color-pink-300: oklch(0.766 0.128 9.55);
+  --color-pink-400: oklch(0.689 0.185 10.35);
+  --color-pink-500: oklch(0.605 0.221 11.11);
+  --color-pink-600: oklch(0.516 0.189 11.15);
+  --color-pink-700: oklch(0.425 0.155 11.58);
+  --color-pink-800: oklch(0.325 0.118 11.53);
+  --color-pink-900: oklch(0.235 0.086 10.81);
+  --color-pink-950: oklch(0.186 0.068 11.42);
 }
 
 @theme inline {
+  --font-heading: var(--font-heading);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -109,7 +143,6 @@ code {
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-secondary-gradient: var(--secondary-gradient);
-  --color-tertiary-gradient: var(--tertiary-gradient);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);

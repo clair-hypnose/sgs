@@ -57,7 +57,7 @@ function SortableItem({ editable, id, index, label, onValueChange, value }: Sort
   };
 
   return (
-    <Item ref={ref} variant="outline">
+    <Item ref={ref} variant="muted">
       <ItemMedia>
         <Badge className="size-5 rounded-full px-1 font-mono tabular-nums" variant="secondary">
           {index + 1}
@@ -67,7 +67,7 @@ function SortableItem({ editable, id, index, label, onValueChange, value }: Sort
         <ItemTitle className="w-full">
           {editable ? (
             <Input
-              className="flex-1 bg-background"
+              className="flex-1 bg-white dark:bg-input"
               onChange={(e) =>
                 onValueChange([...value.slice(0, index), { editable: true, id, label: e.target.value }, ...value.slice(index + 1)])
               }
@@ -110,7 +110,7 @@ function SortableItem({ editable, id, index, label, onValueChange, value }: Sort
               onClick={handleClickRemove}
               size="icon-sm"
               type="button"
-              variant="destructive"
+              variant="outline"
             >
               <Trash2Icon />
             </Button>
