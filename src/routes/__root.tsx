@@ -9,7 +9,23 @@ import { Header } from "./__root.header";
 // ROUTE -----------------------------------------------------------------------------------------------------------------------------------
 export const Route = createRootRouteWithContext<MyRouterContext>()({
   head: () => ({
-    meta: [{ charSet: "utf-8" }, { name: "viewport", content: "width=device-width, initial-scale=1" }, { title: "TanStack Start Starter" }],
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "Kreathera – Stratégie, communication & réseaux sociaux pour thérapeutes" },
+      {
+        name: "description",
+        content:
+          "Kreathera accompagne les thérapeutes en libérant du temps : stratégie digitale, communication, gestion des réseaux sociaux et création de contenus adaptés à votre pratique.",
+      },
+      {
+        name: "keywords",
+        content:
+          "thérapeute, communication thérapeute, réseaux sociaux thérapeute, stratégie digitale thérapeute, marketing thérapie, créateur de contenu bien-être, accompagnement thérapeutes, Kreathera",
+      },
+      { name: "author", content: "KreaThera" },
+      { name: "robots", content: "index, follow" },
+    ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),
 

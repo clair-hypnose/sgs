@@ -17,6 +17,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { FieldGroup, FieldSeparator } from "@/components/ui/field";
 import { Item, ItemContent, ItemGroup, ItemTitle } from "@/components/ui/item";
 import { LoadingSwap } from "@/components/ui/loading-swap";
+import { cn } from "@/lib/utils";
 import { defaultSurveyValues, type SurveyValues, survey, zSurveyValues } from "./index.utils";
 
 // MAIN ------------------------------------------------------------------------------------------------------------------------------------
@@ -51,6 +52,20 @@ export function SurveyForm() {
     toast.success("Merci ! Nous avons bien reçu vos réponses.");
   }
 
+  const sentences = [
+    { id: 1, title: "Notre objectif numéro 1", description: "Créer une agence pensée pour vous simplifier la vie." },
+    {
+      id: 2,
+      title: "Avec les outils d’aujourd’hui",
+      description: " Notre ambition est de vous aider à vous concentrer sur l’essentiel: votre métier.",
+    },
+    {
+      id: 3,
+      title: "On s'occupe du reste!",
+      description: "Votre communication, vos réseaux sociaux et la création de contenu qui vous ressemble.",
+    },
+  ];
+
   return (
     <form className="flex flex-col gap-7" onSubmit={handleSubmit(onSubmit)}>
       <Card className="relative z-10 gap-10">
@@ -70,24 +85,18 @@ export function SurveyForm() {
           </FieldGroup>
           <CardFooter className="mt-10 flex-col items-start gap-4 p-0">
             <ItemGroup className="grid grid-cols-1 gap-4 text-center md:grid-cols-3">
-              <Item className="items-start" variant="muted">
-                <ItemContent className="items-center text-base">
-                  <ItemTitle className="font-heading font-light text-lg text-primary uppercase">Notre objectif numéro 1</ItemTitle>
-                  Créer une agence pensée pour vous simplifier la vie.
-                </ItemContent>
-              </Item>
-              <Item className="items-start" variant="muted">
-                <ItemContent className="items-center text-base">
-                  <ItemTitle className="font-heading font-light text-lg uppercase">Avec les outils d’aujourd’hui</ItemTitle>
-                  Notre ambition est de vous aider à vous concentrer sur l’essentiel: votre métier.
-                </ItemContent>
-              </Item>
-              <Item className="items-start" variant="muted">
-                <ItemContent className="items-center text-base">
-                  <ItemTitle className="font-heading font-light text-lg text-primary uppercase">On s'occupe du reste!</ItemTitle>
-                  Votre communication, vos réseaux sociaux et la création de contenu qui vous ressemble.
-                </ItemContent>
-              </Item>
+              {sentences.map(({ description, id, title }, i) => (
+                <Item className="items-start" key={id} variant="muted">
+                  <ItemContent className="items-center text-base">
+                    <ItemTitle
+                      className={cn("font-heading font-light text-lg uppercase", i % 2 === 0 && "text-pink-400 dark:text-pink-400")}
+                    >
+                      {title}
+                    </ItemTitle>
+                    {description}
+                  </ItemContent>
+                </Item>
+              ))}
             </ItemGroup>
           </CardFooter>
         </CardContent>

@@ -13,7 +13,7 @@ export function Bg() {
           <rect fill="url(#plus-pattern-:rc:)" height="100%" width="100%" />
         </svg>
       </div>
-      <div>
+      <div className="pointer-events-none">
         <div className="absolute inset-x-[0%] inset-y-[0%] left-0 rounded-full bg-primary-gradient/11 blur-[100px] will-change-transform" />
         <div className="absolute inset-x-[30%] inset-y-[0%] right-0 rounded-full bg-secondary-gradient/9 blur-[100px] will-change-transform" />
       </div>
